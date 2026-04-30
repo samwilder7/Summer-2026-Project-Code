@@ -1,1 +1,1 @@
-All of the code I am writing for the Summer Fellowship 2026
+All of the code I am writing for the Summer Fellowship 2026, as well as code given to me or useful for referencing. Also, associated data and graphs. The purpose of this code is to do neutrino detection analysis using SNOwGLoBES. 
