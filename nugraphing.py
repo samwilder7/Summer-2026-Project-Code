@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
+import matplotlib.animation as animation
 
 #mpl.rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
 mpl.rcParams.update({'font.size': 20})#,'family':'monospace'})
@@ -44,59 +45,141 @@ def draw_prelim(ax):
    return
 #keep fig size ratio (10, 7) for each plot (1 sq)
 
-data = h5py.File("/home/swilder/test/D9.6-2D_Ray-By-Ray-Neutrino_000-500km.h5", "r")
-#e
-LN_E_e = data["Number Luminosity"]["Eulerian-Lab Frame"]["nu_e"][:]
-LN_L_e = data["Number Luminosity"]["Lagrangian-Comoving Frame"]["nu_e"][:]
-#ebar
-LN_E_e_b = data["Number Luminosity"]["Eulerian-Lab Frame"]["nu_e_b"][:]
-LN_L_e_b = data["Number Luminosity"]["Lagrangian-Comoving Frame"]["nu_e_b"][:]
-#x
-LN_E_x = data["Number Luminosity"]["Eulerian-Lab Frame"]["nu_x"][:]
-LN_L_x = data["Number Luminosity"]["Lagrangian-Comoving Frame"]["nu_x"][:]
-#xbar
-LN_E_x_b = data["Number Luminosity"]["Eulerian-Lab Frame"]["nu_x_b"][:]
-LN_L_x_b = data["Number Luminosity"]["Lagrangian-Comoving Frame"]["nu_x_b"][:]
-time_pb = data["Time"]["Post Bounce Time"][:]
 
-fig, axs = plt.subplots(nrows = 4, ncols = 1, figsize = (10, 28), layout = "constrained")#make this a grid
-for i in np.arange(180):
-    axs[0].plot(time_pb, LN_L_e[:, 0, i], linestyle = "-")
-    axs[0].plot(time_pb, LN_E_e[:, 0, i], linestyle = ":")
-    axs[1].plot(time_pb, LN_L_e_b[:, 0, i], linestyle = "-")
-    axs[1].plot(time_pb, LN_E_e_b[:, 0, i], linestyle = ":")
-    axs[2].plot(time_pb, LN_L_x[:, 0, i], linestyle = "-")
-    axs[2].plot(time_pb, LN_E_x[:, 0, i], linestyle = ":")
-    axs[3].plot(time_pb, LN_L_x_b[:, 0, i], linestyle = "-")
-    axs[3].plot(time_pb, LN_E_x_b[:, 0, i], linestyle = ":")
-"""
-for i in np.arange(4):
-    axs[i, 0].grid(which = "both")
-    axs[i, 0].minorticks_on()
-    axs[i, 0].grid(visible =True, which='minor', color="#7B7B7B", linestyle='-', alpha=0.2)
-    axs[i, 1].grid(which = "both")
-    axs[i, 1].minorticks_on()
-    axs[i, 1].grid(visible =True, which='minor', color="#7B7B7B", linestyle='-', alpha=0.2)
-    if i == 0:
-        axs[i, 0].set_title("nu_e", fontsize = "small", loc = "left")
-        axs[i, 1].set_title("nu_e", fontsize = "small", loc = "left")
-    elif i == 1:
-        axs[i, 0].set_title("nu_e_b", fontsize = "small", loc = "left")
-        axs[i, 1].set_title("nu_e_b", fontsize = "small", loc = "left")
-    elif i == 2: 
-        axs[i, 0].set_title("nu_x", fontsize = "small", loc = "left")
-        axs[i, 1].set_title("nu_x", fontsize = "small", loc = "left")
-    else: 
-        axs[i, 0].set_title("nu_x_b", fontsize = "small", loc = "left")
-        axs[i, 1].set_title("nu_x_b", fontsize = "small", loc = "left")
-"""
-fig.supxlabel(r"$\mathrm{Time \ (s)}$", fontsize = 16)
-axs[0].set_ylabel(r"$\mathrm{\frac{dL_{\nu_{e}}}{d\Omega} \ (erg \ s^{-1})}$")
+data_000 = h5py.File("/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/D9.6-2D/D9.6-2D-500km-Public/Ray-By-Ray/D9.6-2D_Ray-By-Ray-Neutrino_000-500km.h5", "r")
+data_005 = h5py.File("/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/D9.6-2D/D9.6-2D-500km-Public/Ray-By-Ray/D9.6-2D_Ray-By-Ray-Neutrino_005-500km.h5", "r")
+data_010 = h5py.File("/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/D9.6-2D/D9.6-2D-500km-Public/Ray-By-Ray/D9.6-2D_Ray-By-Ray-Neutrino_010-500km.h5", "r")
+data_015 = h5py.File("/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/D9.6-2D/D9.6-2D-500km-Public/Ray-By-Ray/D9.6-2D_Ray-By-Ray-Neutrino_015-500km.h5", "r")
+data_020 = h5py.File("/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/D9.6-2D/D9.6-2D-500km-Public/Ray-By-Ray/D9.6-2D_Ray-By-Ray-Neutrino_020-500km.h5", "r")
+data_025 = h5py.File("/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/D9.6-2D/D9.6-2D-500km-Public/Ray-By-Ray/D9.6-2D_Ray-By-Ray-Neutrino_025-500km.h5", "r")
+data_030 = h5py.File("/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/D9.6-2D/D9.6-2D-500km-Public/Ray-By-Ray/D9.6-2D_Ray-By-Ray-Neutrino_030-500km.h5", "r")
+data_035 = h5py.File("/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/D9.6-2D/D9.6-2D-500km-Public/Ray-By-Ray/D9.6-2D_Ray-By-Ray-Neutrino_035-500km.h5", "r")
+
+SN_E_e = []
+SN_E_e_bar = []
+SN_E_x = []
+SN_E_x_bar = []
+time = []
+energy_bins = []
+
+#time
+time_000 = data_000["Time"]["Post Bounce Time"][:]
+time_005 = data_005["Time"]["Post Bounce Time"][:] 
+time_010 = data_010["Time"]["Post Bounce Time"][:]
+time_015 = data_015["Time"]["Post Bounce Time"][:] 
+time_020 = data_020["Time"]["Post Bounce Time"][:]
+time_025 = data_025["Time"]["Post Bounce Time"][:]
+time_030 = data_030["Time"]["Post Bounce Time"][:]
+time_035 = data_035["Time"]["Post Bounce Time"][:]
+time = np.append(time_000, time_005, axis = 0)
+time = np.append(time, time_010, axis = 0)
+time = np.append(time, time_015, axis = 0)
+time = np.append(time, time_020, axis = 0)
+#time = np.append(time, time_025, axis = 0)
+#time = np.append(time, time_030, axis = 0)
+#time = np.append(time, time_035, axis = 0)
+
+#energy bins
+energy_bins = data_000["Energy Bins"]["Center"][:]
+
+#eulerian nu e
+SN_E_e_000 = data_000["Number Spectrum"]["Eulerian-Lab Frame"]["nu_e"][:]
+SN_E_e_005 = data_005["Number Spectrum"]["Eulerian-Lab Frame"]["nu_e"][:]
+SN_E_e_010 = data_010["Number Spectrum"]["Eulerian-Lab Frame"]["nu_e"][:]
+SN_E_e_015 = data_015["Number Spectrum"]["Eulerian-Lab Frame"]["nu_e"][:]
+SN_E_e_020 = data_020["Number Spectrum"]["Eulerian-Lab Frame"]["nu_e"][:]
+SN_E_e_025 = data_025["Number Spectrum"]["Eulerian-Lab Frame"]["nu_e"][:]
+SN_E_e_030 = data_030["Number Spectrum"]["Eulerian-Lab Frame"]["nu_e"][:]
+SN_E_e_035 = data_035["Number Spectrum"]["Eulerian-Lab Frame"]["nu_e"][:]
+SN_E_e = np.append(SN_E_e_000, SN_E_e_005, axis=0)
+SN_E_e = np.append(SN_E_e, SN_E_e_010, axis = 0)
+SN_E_e = np.append(SN_E_e, SN_E_e_015, axis = 0)
+SN_E_e = np.append(SN_E_e, SN_E_e_020, axis = 0)
+#SN_E_e = np.append(SN_E_e, SN_E_e_025, axis = 0)
+#SN_E_e = np.append(SN_E_e, SN_E_e_030, axis = 0)
+#SN_E_e = np.append(SN_E_e, SN_E_e_035, axis = 0)
+
+#eulerian nu e bar
+SN_E_e_bar_000 = data_000["Number Spectrum"]["Eulerian-Lab Frame"]["nu_e_b"][:]
+SN_E_e_bar_005 = data_005["Number Spectrum"]["Eulerian-Lab Frame"]["nu_e_b"][:]
+SN_E_e_bar_010 = data_010["Number Spectrum"]["Eulerian-Lab Frame"]["nu_e_b"][:]
+SN_E_e_bar_015 = data_015["Number Spectrum"]["Eulerian-Lab Frame"]["nu_e_b"][:]
+SN_E_e_bar_020 = data_020["Number Spectrum"]["Eulerian-Lab Frame"]["nu_e_b"][:]
+SN_E_e_bar_025 = data_025["Number Spectrum"]["Eulerian-Lab Frame"]["nu_e_b"][:]
+SN_E_e_bar_030 = data_030["Number Spectrum"]["Eulerian-Lab Frame"]["nu_e_b"][:]
+SN_E_e_bar_035 = data_035["Number Spectrum"]["Eulerian-Lab Frame"]["nu_e_b"][:]
+SN_E_e_bar = np.append(SN_E_e_000, SN_E_e_bar_005, axis=0)
+SN_E_e_bar = np.append(SN_E_e_bar, SN_E_e_bar_010, axis = 0)
+SN_E_e_bar = np.append(SN_E_e_bar, SN_E_e_bar_015, axis = 0)
+SN_E_e_bar = np.append(SN_E_e_bar, SN_E_e_bar_020, axis = 0)
+#SN_E_e_bar = np.append(SN_E_e_bar, SN_E_e_bar_025, axis = 0)
+#SN_E_e_bar = np.append(SN_E_e_bar, SN_E_e_bar_030, axis = 0)
+#SN_E_e_bar = np.append(SN_E_e_bar, SN_E_e_bar_035, axis = 0)
+
+#eulerian nu x
+SN_E_x_000 = data_000["Number Spectrum"]["Eulerian-Lab Frame"]["nu_x"][:]
+SN_E_x_005 = data_005["Number Spectrum"]["Eulerian-Lab Frame"]["nu_x"][:]
+SN_E_x_010 = data_010["Number Spectrum"]["Eulerian-Lab Frame"]["nu_x"][:]
+SN_E_x_015 = data_015["Number Spectrum"]["Eulerian-Lab Frame"]["nu_x"][:]
+SN_E_x_020 = data_020["Number Spectrum"]["Eulerian-Lab Frame"]["nu_x"][:]
+SN_E_x_025 = data_025["Number Spectrum"]["Eulerian-Lab Frame"]["nu_x"][:]
+SN_E_x_030 = data_030["Number Spectrum"]["Eulerian-Lab Frame"]["nu_x"][:]
+SN_E_x_035 = data_035["Number Spectrum"]["Eulerian-Lab Frame"]["nu_x"][:]
+SN_E_x = np.append(SN_E_x_000, SN_E_x_005, axis=0)
+SN_E_x = np.append(SN_E_x, SN_E_x_010, axis = 0)
+SN_E_x = np.append(SN_E_x, SN_E_x_015, axis = 0)
+SN_E_x = np.append(SN_E_x, SN_E_x_020, axis = 0)
+#SN_E_x = np.append(SN_E_x, SN_E_x_025, axis = 0)
+#SN_E_x = np.append(SN_E_x, SN_E_x_030, axis = 0)
+#SN_E_x = np.append(SN_E_x, SN_E_x_035, axis = 0)
+
+#eulerian nu x bar
+SN_E_x_bar_000 = data_000["Number Spectrum"]["Eulerian-Lab Frame"]["nu_x_b"][:]
+SN_E_x_bar_005 = data_005["Number Spectrum"]["Eulerian-Lab Frame"]["nu_x_b"][:]
+SN_E_x_bar_010 = data_010["Number Spectrum"]["Eulerian-Lab Frame"]["nu_x_b"][:]
+SN_E_x_bar_015 = data_015["Number Spectrum"]["Eulerian-Lab Frame"]["nu_x_b"][:]
+SN_E_x_bar_020 = data_020["Number Spectrum"]["Eulerian-Lab Frame"]["nu_x_b"][:]
+SN_E_x_bar_025 = data_025["Number Spectrum"]["Eulerian-Lab Frame"]["nu_x_b"][:]
+SN_E_x_bar_030 = data_030["Number Spectrum"]["Eulerian-Lab Frame"]["nu_x_b"][:]
+SN_E_x_bar_035 = data_035["Number Spectrum"]["Eulerian-Lab Frame"]["nu_x_b"][:]
+SN_E_x_bar = np.append(SN_E_e_000, SN_E_x_bar_005, axis=0)
+SN_E_x_bar = np.append(SN_E_e_bar, SN_E_x_bar_010, axis = 0)
+SN_E_x_bar = np.append(SN_E_e_bar, SN_E_x_bar_015, axis = 0)
+SN_E_x_bar = np.append(SN_E_e_bar, SN_E_x_bar_020, axis = 0)
+#SN_E_x_bar = np.append(SN_E_e_bar, SN_E_x_bar_025, axis = 0)
+#SN_E_x_bar = np.append(SN_E_e_bar, SN_E_x_bar_030, axis = 0)
+#SN_E_x_bar = np.append(SN_E_e_bar, SN_E_x_bar_035, axis = 0)
+
+
+
+fig, axs = plt.subplots(nrows = 2, ncols = 2, figsize = (10, 7), layout = "constrained", sharey = True, sharex = True)
+fig.supxlabel(r"$\mathrm{Energy MeV}$")
+
+
+#usingfuncanimate
+def func(frames):
+    axs[0, 0].clear()
+    axs[0, 1].clear()
+    axs[1, 0].clear()
+    axs[1, 1].clear()
+    axs[0, 0].set_title(r"$\mathrm{\nu_e}$")
+    axs[0, 1].set_title(r"$\mathrm{\bar{\nu}_e}$")
+    axs[1, 0].set_title(r"$\mathrm{\nu_{\mu + \tau}}$")
+    axs[1, 1].set_title(r"$\mathrm{\bar{\nu}}_{\mu + \tau}$")
+    axs[0, 0].set_ylim(top = 2.5e56, auto = False)
+    axs[0, 1].set_ylim(top = 2.5e56, auto = False)
+    axs[1, 0].set_ylim(top = 2.5e56, auto = False)
+    axs[1, 1].set_ylim(top = 2.5e56, auto = False)
+    axs[0, 0].plot(energy_bins, SN_E_e[frames, 0, 90], color = "Black", animated=True)
+    axs[0, 1].plot(energy_bins, SN_E_e_bar[frames, 0, 90], color = "Black", animated = True)
+    axs[1, 0].plot(energy_bins, 2.0 * SN_E_x[frames, 0, 90], color = "Black", animated = True)
+    axs[1, 1].plot(energy_bins, 2.0 * SN_E_x_bar[frames, 0, 90], color = "Black", animated = True)
+    axs[1, 1].set_xlabel(f"Time = {round(time[frames], 3)*1000}ms", loc = "right")
+    
+movie = animation.FuncAnimation(fig, func, interval = 50, blit = False, frames = len(time))
+movie.save("movietest.gif")
 plt.show()
-#fig.savefig("nuplots.png")
-
-#take data structures from one file and combine them with a second file (-400 to 200 ms)
-#eulerian nu e priority
-#data structuring, array indexing, appending
-#put all stings in latex (different kinds of spacing)
-#trapezoid rule and numerical integration
+#723 seconds
+#020: 1070 seconds
+#020 w energy bin x axis: 898 seconds
+#log yscale 
