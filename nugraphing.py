@@ -75,8 +75,8 @@ time = np.append(time_000, time_005, axis = 0)
 time = np.append(time, time_010, axis = 0)
 time = np.append(time, time_015, axis = 0)
 time = np.append(time, time_020, axis = 0)
-#time = np.append(time, time_025, axis = 0)
-#time = np.append(time, time_030, axis = 0)
+time = np.append(time, time_025, axis = 0)
+time = np.append(time, time_030, axis = 0)
 #time = np.append(time, time_035, axis = 0)
 
 #energy bins
@@ -95,8 +95,8 @@ SN_E_e = np.append(SN_E_e_000, SN_E_e_005, axis=0)
 SN_E_e = np.append(SN_E_e, SN_E_e_010, axis = 0)
 SN_E_e = np.append(SN_E_e, SN_E_e_015, axis = 0)
 SN_E_e = np.append(SN_E_e, SN_E_e_020, axis = 0)
-#SN_E_e = np.append(SN_E_e, SN_E_e_025, axis = 0)
-#SN_E_e = np.append(SN_E_e, SN_E_e_030, axis = 0)
+SN_E_e = np.append(SN_E_e, SN_E_e_025, axis = 0)
+SN_E_e = np.append(SN_E_e, SN_E_e_030, axis = 0)
 #SN_E_e = np.append(SN_E_e, SN_E_e_035, axis = 0)
 
 #eulerian nu e bar
@@ -112,8 +112,8 @@ SN_E_e_bar = np.append(SN_E_e_000, SN_E_e_bar_005, axis=0)
 SN_E_e_bar = np.append(SN_E_e_bar, SN_E_e_bar_010, axis = 0)
 SN_E_e_bar = np.append(SN_E_e_bar, SN_E_e_bar_015, axis = 0)
 SN_E_e_bar = np.append(SN_E_e_bar, SN_E_e_bar_020, axis = 0)
-#SN_E_e_bar = np.append(SN_E_e_bar, SN_E_e_bar_025, axis = 0)
-#SN_E_e_bar = np.append(SN_E_e_bar, SN_E_e_bar_030, axis = 0)
+SN_E_e_bar = np.append(SN_E_e_bar, SN_E_e_bar_025, axis = 0)
+SN_E_e_bar = np.append(SN_E_e_bar, SN_E_e_bar_030, axis = 0)
 #SN_E_e_bar = np.append(SN_E_e_bar, SN_E_e_bar_035, axis = 0)
 
 #eulerian nu x
@@ -129,8 +129,8 @@ SN_E_x = np.append(SN_E_x_000, SN_E_x_005, axis=0)
 SN_E_x = np.append(SN_E_x, SN_E_x_010, axis = 0)
 SN_E_x = np.append(SN_E_x, SN_E_x_015, axis = 0)
 SN_E_x = np.append(SN_E_x, SN_E_x_020, axis = 0)
-#SN_E_x = np.append(SN_E_x, SN_E_x_025, axis = 0)
-#SN_E_x = np.append(SN_E_x, SN_E_x_030, axis = 0)
+SN_E_x = np.append(SN_E_x, SN_E_x_025, axis = 0)
+SN_E_x = np.append(SN_E_x, SN_E_x_030, axis = 0)
 #SN_E_x = np.append(SN_E_x, SN_E_x_035, axis = 0)
 
 #eulerian nu x bar
@@ -146,14 +146,15 @@ SN_E_x_bar = np.append(SN_E_e_000, SN_E_x_bar_005, axis=0)
 SN_E_x_bar = np.append(SN_E_e_bar, SN_E_x_bar_010, axis = 0)
 SN_E_x_bar = np.append(SN_E_e_bar, SN_E_x_bar_015, axis = 0)
 SN_E_x_bar = np.append(SN_E_e_bar, SN_E_x_bar_020, axis = 0)
-#SN_E_x_bar = np.append(SN_E_e_bar, SN_E_x_bar_025, axis = 0)
-#SN_E_x_bar = np.append(SN_E_e_bar, SN_E_x_bar_030, axis = 0)
+SN_E_x_bar = np.append(SN_E_e_bar, SN_E_x_bar_025, axis = 0)
+SN_E_x_bar = np.append(SN_E_e_bar, SN_E_x_bar_030, axis = 0)
 #SN_E_x_bar = np.append(SN_E_e_bar, SN_E_x_bar_035, axis = 0)
 
 
 
 fig, axs = plt.subplots(nrows = 2, ncols = 2, figsize = (10, 7), layout = "constrained", sharey = True, sharex = True)
-fig.supxlabel(r"$\mathrm{Energy MeV}$")
+fig.supxlabel(r"$\mathrm{Energy \ MeV}$")
+fig.supylabel(r"$\mathrm{Number \ Luminosity \ Spectrum \ \frac{d^2L_n}{dEd\omega} (s^{-1}MeV^{-1}str^{-1}})$", fontsize = 14)
 
 
 #usingfuncanimate
@@ -170,16 +171,17 @@ def func(frames):
     axs[0, 1].set_ylim(top = 2.5e56, auto = False)
     axs[1, 0].set_ylim(top = 2.5e56, auto = False)
     axs[1, 1].set_ylim(top = 2.5e56, auto = False)
-    axs[0, 0].plot(energy_bins, SN_E_e[frames, 0, 90], color = "Black", animated=True)
-    axs[0, 1].plot(energy_bins, SN_E_e_bar[frames, 0, 90], color = "Black", animated = True)
-    axs[1, 0].plot(energy_bins, 2.0 * SN_E_x[frames, 0, 90], color = "Black", animated = True)
-    axs[1, 1].plot(energy_bins, 2.0 * SN_E_x_bar[frames, 0, 90], color = "Black", animated = True)
+    axs[0, 0].semilogx(energy_bins, SN_E_e[frames, 0, 90], color = "Black", animated=True)
+    axs[0, 1].semilogx(energy_bins, SN_E_e_bar[frames, 0, 90], color = "Black", animated = True)
+    axs[1, 0].semilogx(energy_bins, 2.0 * SN_E_x[frames, 0, 90], color = "Black", animated = True)
+    axs[1, 1].semilogx(energy_bins, 2.0 * SN_E_x_bar[frames, 0, 90], color = "Black", animated = True)
     axs[1, 1].set_xlabel(f"Time = {round(time[frames], 3)*1000}ms", loc = "right")
     
 movie = animation.FuncAnimation(fig, func, interval = 50, blit = False, frames = len(time))
-movie.save("movietest.gif")
+movie.save("movietest_030.gif")
 plt.show()
-#723 seconds
 #020: 1070 seconds
 #020 w energy bin x axis: 898 seconds
-#log yscale 
+#020 w log x axis: 1828 seconds, 2060 seconds 6/5
+#up to 030: kernel died after 2667 seconds >:(
+#up to 025: 2514 seconds
