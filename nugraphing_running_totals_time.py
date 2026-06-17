@@ -2,11 +2,12 @@
 total_sums_list = []
 times = []
 total_sum = 0
+sim = "E15-DD2"
 
 for i in np.arange(1, 10694): 
     total_sum_for_timestep = 0
     file_number = str(i).zfill(5)
-    name_var = f"/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/E15-DD2/E15-DD2-500km-Public/snowglobes/Ray-By-Ray/Eulerian-Lab/snowglobes_output/Source/num_{file_number}/E15-DD2_neutrino_number_spectrum_Lab_S_010kpc_"
+    name_var = f"/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/{sim}/{sim}-500km-Public/snowglobes/Ray-By-Ray/Eulerian-Lab/snowglobes_output/Source/num_{file_number}/E15-DD2_neutrino_number_spectrum_Lab_S_010kpc_"
 
     nc_nue_ar40 = np.nan_to_num(np.genfromtxt(name_var + file_number + "_nc_nue_Ar40_ar40kt_events_unweighted.dat", skip_footer = 2))
     if len(nc_nue_ar40) < 1:
