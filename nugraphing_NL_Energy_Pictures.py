@@ -1,12 +1,13 @@
 #using pictures, Number luminosity versus energy
-data_000 = h5py.File("/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/D9.6-2D/D9.6-2D-500km-Public/Ray-By-Ray/D9.6-2D_Ray-By-Ray-Neutrino_000-500km.h5", "r")
-data_005 = h5py.File("/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/D9.6-2D/D9.6-2D-500km-Public/Ray-By-Ray/D9.6-2D_Ray-By-Ray-Neutrino_005-500km.h5", "r")
-data_010 = h5py.File("/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/D9.6-2D/D9.6-2D-500km-Public/Ray-By-Ray/D9.6-2D_Ray-By-Ray-Neutrino_010-500km.h5", "r")
-data_015 = h5py.File("/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/D9.6-2D/D9.6-2D-500km-Public/Ray-By-Ray/D9.6-2D_Ray-By-Ray-Neutrino_015-500km.h5", "r")
-data_020 = h5py.File("/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/D9.6-2D/D9.6-2D-500km-Public/Ray-By-Ray/D9.6-2D_Ray-By-Ray-Neutrino_020-500km.h5", "r")
-data_025 = h5py.File("/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/D9.6-2D/D9.6-2D-500km-Public/Ray-By-Ray/D9.6-2D_Ray-By-Ray-Neutrino_025-500km.h5", "r")
-data_030 = h5py.File("/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/D9.6-2D/D9.6-2D-500km-Public/Ray-By-Ray/D9.6-2D_Ray-By-Ray-Neutrino_030-500km.h5", "r")
-data_035 = h5py.File("/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/D9.6-2D/D9.6-2D-500km-Public/Ray-By-Ray/D9.6-2D_Ray-By-Ray-Neutrino_035-500km.h5", "r")
+sim = "E15-DD2"
+data_000 = h5py.File(f"/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/{sim}/{sim}-500km-Public/Ray-By-Ray/D9.6-2D_Ray-By-Ray-Neutrino_000-500km.h5", "r")
+data_005 = h5py.File(f"/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/{sim}/{sim}-500km-Public/Ray-By-Ray/D9.6-2D_Ray-By-Ray-Neutrino_005-500km.h5", "r")
+data_010 = h5py.File(f"/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/{sim}/{sim}-500km-Public/Ray-By-Ray/D9.6-2D_Ray-By-Ray-Neutrino_010-500km.h5", "r")
+data_015 = h5py.File(f"/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/{sim}/{sim}-500km-Public/Ray-By-Ray/D9.6-2D_Ray-By-Ray-Neutrino_015-500km.h5", "r")
+data_020 = h5py.File(f"/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/{sim}/{sim}-500km-Public/Ray-By-Ray/D9.6-2D_Ray-By-Ray-Neutrino_020-500km.h5", "r")
+data_025 = h5py.File(f"/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/{sim}/{sim}-500km-Public/Ray-By-Ray/D9.6-2D_Ray-By-Ray-Neutrino_025-500km.h5", "r")
+data_030 = h5py.File(f"/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/{sim}/{sim}-500km-Public/Ray-By-Ray/D9.6-2D_Ray-By-Ray-Neutrino_030-500km.h5", "r")
+data_035 = h5py.File(f"/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/{sim}/{sim}-500km-Public/Ray-By-Ray/D9.6-2D_Ray-By-Ray-Neutrino_035-500km.h5", "r")
 
 SN_E_e = []
 SN_E_e_bar = []
