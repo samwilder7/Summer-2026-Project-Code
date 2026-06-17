@@ -2,11 +2,13 @@
 total_sums_list = []
 times = []
 
+sim = "E15-DD2"
 
+#update to 9.6########################################################################################################################################################################
 for i in np.arange(1, 10694): 
     total_sum = 0
     file_number = str(i).zfill(5)
-    name_var = f"/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/E15-DD2/E15-DD2-500km-Public/snowglobes/Ray-By-Ray/Eulerian-Lab/snowglobes_output/Source/num_{file_number}/E15-DD2_neutrino_number_spectrum_Lab_S_010kpc_"
+    name_var = f"/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/{sim}/{sim}-500km-Public/snowglobes/Ray-By-Ray/Eulerian-Lab/snowglobes_output/Source/num_{file_number}/E15-DD2_neutrino_number_spectrum_Lab_S_010kpc_"
 
     nc_nue_ar40 = np.nan_to_num(np.genfromtxt(name_var + file_number + "_nc_nue_Ar40_ar40kt_events_unweighted.dat", skip_footer = 2))
     if len(nc_nue_ar40) < 1:
@@ -66,7 +68,7 @@ for i in np.arange(1, 10694):
     total_sums_list = np.append(total_sums_list, total_sum)
 
 fig, axs = plt.subplots(figsize = (20, 7))
-axs.plot(times, total_sums_list)
+axs.plot(times, (2*(10**(-4)))*total_sums_list)
 axs.set_xlabel(r"$\mathrm{Time \ Step}$")
 axs.set_ylabel(r"$\mathrm{Neutrinos}$")
 axs.set_title(r"$\mathrm{Total \ Sums \ for \ Each \ Time \ Signature}$")
