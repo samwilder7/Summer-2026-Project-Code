@@ -1,11 +1,13 @@
 #snowglobes graphing smeared vs nonsmeared vs summed 
 #randomly empty files: 00078, 00137, 00215, 00245, 294, 377, 395, 414, 440, 462, 700, 712, 738, 791, 810, 857, 878, 888, 959, 970, 979, 
 
+sim = "E15-DD2"
+
 for i in np.arange(1, 10694): 
     file_number = str(i).zfill(5)
     
 
-    name_var = f"/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/E15-DD2/E15-DD2-500km-Public/snowglobes/Ray-By-Ray/Eulerian-Lab/snowglobes_output/Source/num_{file_number}/E15-DD2_neutrino_number_spectrum_Lab_S_010kpc_"
+    name_var = f"/lustre/orion/ast137/proj-shared/colterrichardson/Neutrinos_Summer_2026/2D/{sim}/{sim}-500km-Public/snowglobes/Ray-By-Ray/Eulerian-Lab/snowglobes_output/Source/num_{file_number}/E15-DD2_neutrino_number_spectrum_Lab_S_010kpc_"
     
     #argon 
     ##smeared & nc
